@@ -291,12 +291,22 @@ function Index() {
               <h2 className="font-display text-3xl sm:text-5xl leading-tight">Donnons vie à votre prochaine campagne.</h2>
               <p className="mt-6 text-muted-foreground">Parlez-moi de votre marque, de votre produit, de votre intention.</p>
               <div className="mt-8 space-y-3 text-sm">
-                {[["Instagram", "@kzesco"], ["TikTok", "@kzesco"], ["WhatsApp", "Sur demande"], ["Email", "hello@kzesco.com"]].map(([k, v]) => (
-                  <div key={k} className="flex items-center justify-between gap-4 py-3 border-b border-border max-w-md">
-                    <span className="uppercase tracking-widest text-xs text-muted-foreground">{k}</span>
-                    <span>{v}</span>
-                  </div>
-                ))}
+                <div className="flex items-center justify-between gap-4 py-3 border-b border-border max-w-md">
+                  <span className="uppercase tracking-widest text-xs text-muted-foreground">Instagram</span>
+                  <a href="https://www.instagram.com/creatrice_ugc6" target="_blank" rel="noreferrer" className="hover:text-primary transition">@creatrice_ugc6</a>
+                </div>
+                <div className="flex items-center justify-between gap-4 py-3 border-b border-border max-w-md">
+                  <span className="uppercase tracking-widest text-xs text-muted-foreground">TikTok</span>
+                  <a href="https://www.tiktok.com/@kzesco" target="_blank" rel="noreferrer" className="hover:text-primary transition">@kzesco</a>
+                </div>
+                <div className="flex items-center justify-between gap-4 py-3 border-b border-border max-w-md">
+                  <span className="uppercase tracking-widest text-xs text-muted-foreground">WhatsApp</span>
+                  <a href="https://wa.me/33780074353" target="_blank" rel="noreferrer" className="hover:text-primary transition">+33 7 80 07 43 53</a>
+                </div>
+                <div className="flex items-center justify-between gap-4 py-3 border-b border-border max-w-md">
+                  <span className="uppercase tracking-widest text-xs text-muted-foreground">Email</span>
+                  <a href="mailto:Kzescocamara@gmail.com" className="hover:text-primary transition">Kzescocamara@gmail.com</a>
+                </div>
               </div>
             </div>
             <form className="space-y-4 p-6 sm:p-8 rounded-2xl bg-card/80 backdrop-blur border border-border" onSubmit={(e) => { e.preventDefault(); alert("Merci ! Je reviens vers vous très vite."); }}>
