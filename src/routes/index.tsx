@@ -264,11 +264,11 @@ function Index() {
           ].map(b => (
             <div key={b.name} className="group aspect-[3/2] flex flex-col items-center justify-center gap-2 border border-border rounded-xl p-4 bg-card hover:border-primary transition">
               <img
-                src={`https://logo.clearbit.com/${b.domain}`}
+                src={`https://unavatar.io/${b.domain}?fallback=https://www.google.com/s2/favicons?sz=128%26domain=${b.domain}`}
                 alt={b.name}
                 loading="lazy"
-                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition dark:invert"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                className="max-h-12 sm:max-h-14 w-auto object-contain opacity-90 group-hover:opacity-100 transition"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `https://www.google.com/s2/favicons?sz=128&domain=${b.domain}`; }}
               />
               <span className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground group-hover:text-primary transition text-center">{b.name}</span>
             </div>
