@@ -251,9 +251,27 @@ function Index() {
       <Section n="08" label="Inspirations">
         <h2 className="font-display text-3xl sm:text-5xl mb-4">Des collaborations que j'aimerais réaliser.</h2>
         <p className="text-muted-foreground max-w-xl mb-10">Quelques univers de marques qui m'inspirent.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {["Louis Vuitton", "Atelier Cologne", "SKIMS", "Zara", "Diptyque", "Rhode", "Rare Beauty", "Dior"].map(b => (
-            <div key={b} className="aspect-[3/2] grid place-items-center border border-border rounded-xl text-muted-foreground font-display text-lg sm:text-xl hover:border-primary hover:text-primary transition">{b}</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          {[
+            { name: "Louis Vuitton", domain: "louisvuitton.com" },
+            { name: "Atelier Cologne", domain: "ateliercologne.com" },
+            { name: "SKIMS", domain: "skims.com" },
+            { name: "Zara", domain: "zara.com" },
+            { name: "Diptyque", domain: "diptyqueparis.com" },
+            { name: "Rhode", domain: "rhodeskin.com" },
+            { name: "Rare Beauty", domain: "rarebeauty.com" },
+            { name: "Dior", domain: "dior.com" },
+          ].map(b => (
+            <div key={b.name} className="group aspect-[3/2] flex flex-col items-center justify-center gap-2 border border-border rounded-xl p-4 bg-card hover:border-primary transition">
+              <img
+                src={`https://logo.clearbit.com/${b.domain}`}
+                alt={b.name}
+                loading="lazy"
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition dark:invert"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+              <span className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground group-hover:text-primary transition text-center">{b.name}</span>
+            </div>
           ))}
         </div>
       </Section>
