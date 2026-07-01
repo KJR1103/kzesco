@@ -72,9 +72,29 @@ function Section({ id, n, label, children }: { id?: string; n: string; label: st
 function Index() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1800);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background text-foreground">
+      {/* Loader */}
+      <div
+        className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-700 ${loading ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        aria-hidden={!loading}
+      >
+        <div className="flex flex-col items-center gap-6">
+          <div className="font-display text-4xl sm:text-6xl tracking-[0.4em] text-foreground animate-pulse">KZESCO</div>
+          <div className="h-[2px] w-40 sm:w-56 bg-border overflow-hidden rounded-full">
+            <div className="h-full w-1/3 bg-primary animate-[loader_1.4s_ease-in-out_infinite]" />
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Créatrice de contenu UGC</div>
+        </div>
+      </div>
+
       {/* Nav */}
       <header className="fixed top-0 inset-x-0 z-40 backdrop-blur-md bg-background/60 border-b border-border/40">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-between gap-4">
