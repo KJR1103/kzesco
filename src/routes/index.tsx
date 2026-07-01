@@ -326,13 +326,41 @@ function Index() {
                 </div>
               </div>
             </div>
-            <form className="space-y-4 p-6 sm:p-8 rounded-2xl bg-card/80 backdrop-blur border border-border" onSubmit={(e) => { e.preventDefault(); alert("Merci ! Je reviens vers vous très vite."); }}>
+            <form
+              className="space-y-4 p-6 sm:p-8 rounded-2xl bg-card/80 backdrop-blur border border-border"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = new FormData(form);
+                try {
+                  const res = await fetch("https://formsubmit.co/ajax/Kzescocamara@gmail.com", {
+                    method: "POST",
+                    headers: { "Accept": "application/json" },
+                    body: data,
+                  });
+                  if (!res.ok) throw new Error("network");
+                  form.reset();
+                  alert("Merci ! Votre message a bien été envoyé. Je reviens vers vous très vite.");
+                } catch {
+                  alert("Une erreur est survenue. Contactez-moi directement sur WhatsApp au +33 7 80 07 43 53.");
+                }
+              }}
+            >
+              {/* FormSubmit config */}
+              <input type="hidden" name="_subject" value="Nouveau message depuis kzesco.com" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
               <div className="grid sm:grid-cols-2 gap-4">
-                <input required placeholder="Nom" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
-                <input required type="email" placeholder="Email" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input required name="Nom" placeholder="Nom" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input required type="email" name="Email" placeholder="Email" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
               </div>
-              <input placeholder="Marque" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
-              <select className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <input name="Marque" placeholder="Marque" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input name="WhatsApp" type="tel" placeholder="WhatsApp (optionnel)" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+              </div>
+              <select name="Type de projet" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm">
                 <option>Type de projet</option>
                 <option>UGC Beauté / Skincare</option>
                 <option>UGC Mode / Lifestyle</option>
@@ -340,8 +368,11 @@ function Index() {
                 <option>Voice-over / Tutoriel</option>
                 <option>Autre</option>
               </select>
-              <textarea required placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
+              <textarea required name="Message" placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
               <button className="w-full py-3 rounded-full bg-primary text-primary-foreground text-sm uppercase tracking-widest hover:opacity-90 transition">Envoyer le message</button>
+              <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+                Votre message est envoyé directement sur ma boîte mail <span className="text-foreground">Kzescocamara@gmail.com</span> — sans quitter le site.
+              </p>
             </form>
           </div>
         </div>
