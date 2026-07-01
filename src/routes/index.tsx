@@ -134,7 +134,6 @@ function Index() {
           </div>
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
             <img src={photos[3]} alt="KZESCO en shooting" className="w-full h-full object-cover" />
-            <div className="absolute bottom-4 left-4 text-xs uppercase tracking-widest bg-background/80 backdrop-blur px-3 py-2 rounded-full">Studio · 2026</div>
           </div>
         </div>
       </Section>
@@ -252,9 +251,27 @@ function Index() {
       <Section n="08" label="Inspirations">
         <h2 className="font-display text-3xl sm:text-5xl mb-4">Des collaborations que j'aimerais réaliser.</h2>
         <p className="text-muted-foreground max-w-xl mb-10">Quelques univers de marques qui m'inspirent.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {["Louis Vuitton", "Atelier Cologne", "SKIMS", "Zara", "Diptyque", "Rhode", "Rare Beauty", "Dior"].map(b => (
-            <div key={b} className="aspect-[3/2] grid place-items-center border border-border rounded-xl text-muted-foreground font-display text-lg sm:text-xl hover:border-primary hover:text-primary transition">{b}</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          {[
+            { name: "Louis Vuitton", domain: "louisvuitton.com" },
+            { name: "Atelier Cologne", domain: "ateliercologne.com" },
+            { name: "SKIMS", domain: "skims.com" },
+            { name: "Zara", domain: "zara.com" },
+            { name: "Diptyque", domain: "diptyqueparis.com" },
+            { name: "Rhode", domain: "rhodeskin.com" },
+            { name: "Rare Beauty", domain: "rarebeauty.com" },
+            { name: "Dior", domain: "dior.com" },
+          ].map(b => (
+            <div key={b.name} className="group aspect-[3/2] flex flex-col items-center justify-center gap-2 border border-border rounded-xl p-4 bg-card hover:border-primary transition">
+              <img
+                src={`https://logo.clearbit.com/${b.domain}`}
+                alt={b.name}
+                loading="lazy"
+                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition dark:invert"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+              <span className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground group-hover:text-primary transition text-center">{b.name}</span>
+            </div>
           ))}
         </div>
       </Section>
@@ -309,13 +326,41 @@ function Index() {
                 </div>
               </div>
             </div>
-            <form className="space-y-4 p-6 sm:p-8 rounded-2xl bg-card/80 backdrop-blur border border-border" onSubmit={(e) => { e.preventDefault(); alert("Merci ! Je reviens vers vous très vite."); }}>
+            <form
+              className="space-y-4 p-6 sm:p-8 rounded-2xl bg-card/80 backdrop-blur border border-border"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = new FormData(form);
+                try {
+                  const res = await fetch("https://formsubmit.co/ajax/Kzescocamara@gmail.com", {
+                    method: "POST",
+                    headers: { "Accept": "application/json" },
+                    body: data,
+                  });
+                  if (!res.ok) throw new Error("network");
+                  form.reset();
+                  alert("Merci ! Votre message a bien été envoyé. Je reviens vers vous très vite.");
+                } catch {
+                  alert("Une erreur est survenue. Contactez-moi directement sur WhatsApp au +33 7 80 07 43 53.");
+                }
+              }}
+            >
+              {/* FormSubmit config */}
+              <input type="hidden" name="_subject" value="Nouveau message depuis kzesco.com" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
               <div className="grid sm:grid-cols-2 gap-4">
-                <input required placeholder="Nom" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
-                <input required type="email" placeholder="Email" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input required name="Nom" placeholder="Nom" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input required type="email" name="Email" placeholder="Email" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
               </div>
-              <input placeholder="Marque" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
-              <select className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <input name="Marque" placeholder="Marque" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+                <input name="WhatsApp" type="tel" placeholder="WhatsApp (optionnel)" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm" />
+              </div>
+              <select name="Type de projet" className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm">
                 <option>Type de projet</option>
                 <option>UGC Beauté / Skincare</option>
                 <option>UGC Mode / Lifestyle</option>
@@ -323,8 +368,11 @@ function Index() {
                 <option>Voice-over / Tutoriel</option>
                 <option>Autre</option>
               </select>
-              <textarea required placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
+              <textarea required name="Message" placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
               <button className="w-full py-3 rounded-full bg-primary text-primary-foreground text-sm uppercase tracking-widest hover:opacity-90 transition">Envoyer le message</button>
+              <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+                Votre message est envoyé directement sur ma boîte mail <span className="text-foreground">Kzescocamara@gmail.com</span> — sans quitter le site.
+              </p>
             </form>
           </div>
         </div>
