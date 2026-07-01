@@ -97,7 +97,7 @@ function Index() {
         <img src={photos[0]} alt="Portrait de KZESCO" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
         <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 pb-16 sm:pb-24">
-          <div className="text-xs uppercase tracking-[0.3em] text-primary mb-6">Créatrice de contenu UGC · Studio</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-primary mb-6">Créatrice de contenu UGC </div>
           <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl leading-[1.05] max-w-4xl">
             Créer du contenu<br/>qui attire.<br/><em className="text-primary not-italic">Créer des émotions.</em>
           </h1>
@@ -124,7 +124,7 @@ function Index() {
       <Section n="01" label="Une nouvelle voix">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-3xl sm:text-5xl leading-tight">Une nouvelle voix pour votre marque.</h2>
+            <h2 className="font-display text-3xl sm:text-5xl leading-tight">Une nouvelle voix pour votre marque</h2>
             <p className="mt-6 text-muted-foreground leading-relaxed">
               Les consommateurs ne croient plus aux publicités classiques. Ils écoutent des voix humaines, regardent des visages familiers, suivent des créatrices qui leur ressemblent.
             </p>
@@ -253,7 +253,7 @@ function Index() {
         <h2 className="font-display text-3xl sm:text-5xl mb-4">Des collaborations que j'aimerais réaliser.</h2>
         <p className="text-muted-foreground max-w-xl mb-10">Quelques univers de marques qui m'inspirent.</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {["Maison", "Atelier", "Studio", "Édition", "Maison N°4", "Parfumerie", "Soin", "Marque"].map(b => (
+          {["Louis Vuitton", "Atelier Cologne", "SKIMS", "Zara", "Diptyque", "Rhode", "Rare Beauty", "Dior"].map(b => (
             <div key={b} className="aspect-[3/2] grid place-items-center border border-border rounded-xl text-muted-foreground font-display text-lg sm:text-xl hover:border-primary hover:text-primary transition">{b}</div>
           ))}
         </div>
