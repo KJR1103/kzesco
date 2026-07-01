@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import photo1 from "@/assets/photo1.jpeg.asset.json";
 import photo2 from "@/assets/photo2.jpeg.asset.json";
 import photo3 from "@/assets/photo3.jpeg.asset.json";
@@ -72,9 +72,29 @@ function Section({ id, n, label, children }: { id?: string; n: string; label: st
 function Index() {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1800);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-background text-foreground">
+      {/* Loader */}
+      <div
+        className={`fixed inset-0 z-[100] flex items-center justify-center bg-background transition-opacity duration-700 ${loading ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        aria-hidden={!loading}
+      >
+        <div className="flex flex-col items-center gap-6">
+          <div className="font-display text-4xl sm:text-6xl tracking-[0.4em] text-foreground animate-pulse">KZESCO</div>
+          <div className="h-[2px] w-40 sm:w-56 bg-border overflow-hidden rounded-full">
+            <div className="h-full w-1/3 bg-primary animate-[loader_1.4s_ease-in-out_infinite]" />
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Créatrice de contenu UGC</div>
+        </div>
+      </div>
+
       {/* Nav */}
       <header className="fixed top-0 inset-x-0 z-40 backdrop-blur-md bg-background/60 border-b border-border/40">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-between gap-4">
@@ -264,11 +284,11 @@ function Index() {
           ].map(b => (
             <div key={b.name} className="group aspect-[3/2] flex flex-col items-center justify-center gap-2 border border-border rounded-xl p-4 bg-card hover:border-primary transition">
               <img
-                src={`https://logo.clearbit.com/${b.domain}`}
+                src={`https://unavatar.io/${b.domain}?fallback=https://www.google.com/s2/favicons?sz=128%26domain=${b.domain}`}
                 alt={b.name}
                 loading="lazy"
-                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition dark:invert"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                className="max-h-12 sm:max-h-14 w-auto object-contain opacity-90 group-hover:opacity-100 transition"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = `https://www.google.com/s2/favicons?sz=128&domain=${b.domain}`; }}
               />
               <span className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground group-hover:text-primary transition text-center">{b.name}</span>
             </div>
@@ -370,9 +390,6 @@ function Index() {
               </select>
               <textarea required name="Message" placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
               <button className="w-full py-3 rounded-full bg-primary text-primary-foreground text-sm uppercase tracking-widest hover:opacity-90 transition">Envoyer le message</button>
-              <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
-                Votre message est envoyé directement sur ma boîte mail <span className="text-foreground">Kzescocamara@gmail.com</span> — sans quitter le site.
-              </p>
             </form>
           </div>
         </div>
