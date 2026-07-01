@@ -370,9 +370,6 @@ function Index() {
               </select>
               <textarea required name="Message" placeholder="Votre message" rows={5} className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:border-primary outline-none text-sm resize-none" />
               <button className="w-full py-3 rounded-full bg-primary text-primary-foreground text-sm uppercase tracking-widest hover:opacity-90 transition">Envoyer le message</button>
-              <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
-                Votre message est envoyé directement sur ma boîte mail <span className="text-foreground">Kzescocamara@gmail.com</span> — sans quitter le site.
-              </p>
             </form>
           </div>
         </div>
