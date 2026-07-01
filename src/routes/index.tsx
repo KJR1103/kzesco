@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import photo1 from "@/assets/photo1.jpeg.asset.json";
 import photo2 from "@/assets/photo2.jpeg.asset.json";
 import photo3 from "@/assets/photo3.jpeg.asset.json";
