@@ -134,7 +134,6 @@ function Index() {
           </div>
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
             <img src={photos[3]} alt="KZESCO en shooting" className="w-full h-full object-cover" />
-            <div className="absolute bottom-4 left-4 text-xs uppercase tracking-widest bg-background/80 backdrop-blur px-3 py-2 rounded-full">Studio · 2026</div>
           </div>
         </div>
       </Section>
